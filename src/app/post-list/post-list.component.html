@@ -1,0 +1,16 @@
+<li *ngFor="let post of posts" (click)="onSelect(post)">
+  <div [class.selected]="post === selectedPost">{{ post.title }} </div>
+</li>
+
+<div *ngIf="selectedPost">
+  <div><span>id: </span>{{selectedPost.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedPost.title" placeholder="Title"/>
+    </label>
+  </div>
+</div>
+
+
+<!--  <app-post></app-post>-->
+
