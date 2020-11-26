@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 import {Post} from '../data/Post';
+import {PostService} from '../post.service';
+import {MessageService} from '../message.service';
 
 
 @Component({
@@ -11,9 +13,16 @@ import {Post} from '../data/Post';
 export class PostDetailsComponent implements OnInit {
 
   @Input() post: Post;
-  constructor() { }
+
+  constructor(private postService: PostService, private messageService: MessageService) {
+  }
+
 
   ngOnInit(): void {
   }
 
+  save(): void {
+    this.postService.updatePost(this.post)
+      .subscribe(() => {}); //this.goBack()
+  }
 }

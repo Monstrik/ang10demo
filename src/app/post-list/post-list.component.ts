@@ -25,4 +25,19 @@ export class PostListComponent implements OnInit {
     this.selectedPost = post;
   }
 
+  add(title: string): void {
+    title = title.trim();
+    if (!name) { return; }
+    this.postService.addPost({ title } as Post)
+      .subscribe(post => {
+        this.posts.push(post);
+      });
+  }
+
+
+
+  delete(post: Post): void {
+    this.posts = this.posts.filter(p => p !== post);
+    this.postService.deletePost(post).subscribe();
+  }
 }
