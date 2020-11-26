@@ -20,6 +20,5 @@ export class PostListComponent implements OnInit {
 
   onSelect(post: Post): void {
     this.selectedPost = post;
-    console.log('this.selectedPost=', this.selectedPost);
   }
 }
