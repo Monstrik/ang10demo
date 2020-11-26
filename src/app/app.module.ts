@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
     PostDetailsComponent,
-    PostListComponent
+    PostListComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

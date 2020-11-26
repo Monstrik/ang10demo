@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from '../data/Post';
-
-
 import {PostService} from '../post.service';
+import {MessageService} from '../message.service';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +13,7 @@ export class PostListComponent implements OnInit {
   posts: Post[];
   selectedPost: Post;
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -22,6 +21,7 @@ export class PostListComponent implements OnInit {
   }
 
   onSelect(post: Post): void {
+    this.messageService.add(`PostListComponent: Selected post id=${post.id}`);
     this.selectedPost = post;
   }
 
