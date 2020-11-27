@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <textarea [ngModel]="post.text"
+      <textarea [ngModel]="post.text | safe: 'html'"
                 name="text"
                 id="text"
                 #text="ngModel"

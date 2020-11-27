@@ -4,19 +4,22 @@ import {NgForm} from '@angular/forms';
 import {Post} from '../data/Post';
 import {PostService} from '../post.service';
 import {MessageService} from '../message.service';
-
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.scss']
 })
+
 export class PostDetailsComponent implements OnInit {
   editMode = false;
   @Input() post: Post;
   @Output() reload = new EventEmitter<boolean>();
 
-  constructor(private postService: PostService, private messageService: MessageService) {
+  constructor(private postService: PostService,
+              private messageService: MessageService,
+              public sanitizer: DomSanitizer) {
   }
 
 
@@ -30,7 +33,7 @@ export class PostDetailsComponent implements OnInit {
   save(): void {
     this.postService.updatePost(this.post)
       .subscribe(() => {
-      }); //this.goBack()
+      });
     this.editMode = false;
     this.reload.emit(true);
   }
@@ -58,7 +61,8 @@ export class PostDetailsComponent implements OnInit {
 
     this.postService.updatePost(post)
       .subscribe((res) => {
-        console.log('res', res);
+        this.messageService.add(`PostDetailsComponent: post updated on server`);
+        console.log('PostDetailsComponent: post updated on server', res);
         this.editMode = false;
         this.reload.emit(true);
       });
