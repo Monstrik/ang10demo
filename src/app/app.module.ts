@@ -13,6 +13,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {InMemoryDataService} from './in-memory-data.service';
 import {PostSearchComponent} from './post-search/post-search.component';
 import {FormsModule} from '@angular/forms';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule} from '@angular/forms';
     PostDetailsComponent,
     PostListComponent,
     MessagesComponent,
-    PostSearchComponent
+    PostSearchComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
