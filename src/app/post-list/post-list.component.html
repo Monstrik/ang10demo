@@ -4,11 +4,11 @@
         [class.selected]="post === selectedPost">
 
       <button class="delete" title="X" (click)="delete(post)">x</button>
-      &nbsp; |  &nbsp;<span>{{ post.title }} </span>
+      &nbsp;&nbsp;<span>{{ post.title }} </span>
     </li>
   </ul>
 </div>
-<app-post-details [post]="selectedPost"></app-post-details>
+<app-post-details [post]="selectedPost" (reload)="reload()"></app-post-details>
 <!--<button (click)="add(heroName.value); heroName.value=''">add</button>-->
 <!--<button (click)="add(heroName.value); heroName.value=''">Add New</button>-->
 

@@ -1,12 +1,73 @@
 <div *ngIf="post">
-  <h2>{{post.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{post.id}}</div>
-  <div>
-    <label>Title:
-      <input [(ngModel)]="post.title" placeholder="Title"/>
-<!--      <input [value]="post.title" placeholder="Title"/>-->
-    </label>
-    <button (click)="save()">save</button>
+
+  <div *ngIf="!editMode">
+    <h2>{{post.title | uppercase}}</h2>
+    <div [innerHTML]="post.text"></div>
+    <br>
+    <div class="tags">TAGS: {{post.tags.join(', ') | uppercase}}</div>
+    <br>
+    <button (click)="edit()">Edit</button>
   </div>
 
+  <div *ngIf="editMode">
+    <form #postForm="ngForm" (ngSubmit)="saveForm(postForm)">
+      <input [ngModel]="post.title"
+             #title="ngModel"
+             type="text"
+             name="title"
+             id="title"
+             class="titleInput validation-error"
+             required
+             minlength="3">
+      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+           class="alert alert-danger">
+        <div *ngIf="title.errors.required">
+          Title is required.
+        </div>
+        <div *ngIf="title.errors.minlength">
+          Title must be at least 3 characters long.
+        </div>
+      </div>
+
+      <textarea [ngModel]="post.text"
+                name="text"
+                id="text"
+                #text="ngModel"
+                cols="50"
+                rows="10"
+                required
+                minlength="10"></textarea>
+      <div *ngIf="text.invalid && (text.dirty || text.touched)"
+           class="alert alert-danger">
+        <div *ngIf="text.errors.required">
+          Is required.
+        </div>
+        <div *ngIf="text.errors.minlength">
+          Must be at least 10 characters long.
+        </div>
+      </div>
+
+
+      <input [ngModel]="post.tags.join(', ') | uppercase"
+             #tags="ngModel"
+             name="tags"
+             id="tags"
+             class="tagsInput"
+             type="text"
+             required
+             minlength="3">&nbsp;
+      <button [disabled]="postForm.invalid" type="submit">Save</button>&nbsp;
+      <button (click)="cancel()">Cancel</button>&nbsp;
+      <div *ngIf="tags.invalid && (tags.dirty || tags.touched)"
+           class="alert alert-danger">
+        <div *ngIf="tags.errors.required">
+          Is required.
+        </div>
+        <div *ngIf="tags.errors.minlength">
+          Must be at least 3 characters long.
+        </div>
+      </div>
+
+    </form>
+  </div>
 </div>

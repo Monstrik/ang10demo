@@ -8,6 +8,7 @@ import {MessageService} from '../message.service';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
+
 export class PostListComponent implements OnInit {
 
   posts: Post[];
@@ -27,17 +28,27 @@ export class PostListComponent implements OnInit {
 
   add(title: string): void {
     title = title.trim();
-    if (!name) { return; }
-    this.postService.addPost({ title } as Post)
+    if (!name) {
+      return;
+    }
+    this.postService.addPost({title} as Post)
       .subscribe(post => {
         this.posts.push(post);
       });
   }
 
 
-
   delete(post: Post): void {
+    this.selectedPost = null;
     this.posts = this.posts.filter(p => p !== post);
     this.postService.deletePost(post).subscribe();
+  }
+
+  reload(): void {
+    this.postService.getPosts().subscribe(posts => {
+      this.messageService.add(`PostListComponent: reloaded`);
+      this.posts = posts;
+      this.selectedPost = null;
+    });
   }
 }
