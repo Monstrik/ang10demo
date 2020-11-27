@@ -2,7 +2,7 @@
 
   <div *ngIf="!editMode">
     <h2>{{post.title | uppercase}}</h2>
-    <div [innerHTML]="post.text"></div>
+    <div [innerHTML]="post.text | safe: 'html'"></div>
     <br>
     <div class="tags">TAGS: {{post.tags.join(', ') | uppercase}}</div>
     <br>
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <textarea [ngModel]="post.text | safe: 'html'"
+      <textarea [ngModel]="post.text"
                 name="text"
                 id="text"
                 #text="ngModel"
