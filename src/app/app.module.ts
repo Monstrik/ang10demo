@@ -12,6 +12,7 @@ import {PostListComponent} from './post-list/post-list.component';
 import {MessagesComponent} from './messages/messages.component';
 import {InMemoryDataService} from './in-memory-data.service';
 import {PostSearchComponent} from './post-search/post-search.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {PostSearchComponent} from './post-search/post-search.component';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
-    )
+    ),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

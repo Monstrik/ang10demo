@@ -234,6 +234,10 @@ footer a {
   align-items: center;
 }
 
+.validation-error input {
+  border-left: 5px solid red;
+}
+
 
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
